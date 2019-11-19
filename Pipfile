@@ -10,6 +10,7 @@ fastapi = "*"
 uvicorn = "*"
 requests = "*"
 requests-cache = "*"
+translate = "*"
 
 [requires]
 python_version = "3.8"
