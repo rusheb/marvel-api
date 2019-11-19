@@ -5,7 +5,6 @@ from os import environ
 from typing import Dict, Generator
 
 import requests
-import requests_cache
 
 REQUEST_URL = "http://gateway.marvel.com/v1/public/characters"
 PUBLIC_KEY = environ["MARVEL_PUBLIC_KEY"]
@@ -42,12 +41,3 @@ def get_characters_chunk(offset: int) -> Dict:
     response_string = requests.get(REQUEST_URL, params=params)
     response_json = json.loads(response_string.content.decode("utf-8"))
     return response_json["data"]["results"]
-
-
-if __name__ == "__main__":
-    requests_cache.install_cache("marvel_cache", ignored_parameters=["hash", "ts"])
-
-    ids = [character["id"] for character in get_all_characters()]
-
-    print(f"Found {len(ids)} ids")
-    print(ids)

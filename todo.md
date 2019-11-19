@@ -1,11 +1,11 @@
 NOW
-- [x] Do chunking properly
+- [x] Set up API with characters endpoint
 
 TODO
 - [ ] Set cache expiry date
 - [ ] Remove hardcoding of 100 increment
 - [ ] Do logging properly
-- [ ] Setup basic API
+- [ ] Change port to 8080
 
 DONE
 - [x] Make a request to the Marvel API
@@ -13,3 +13,4 @@ DONE
 - [x] Get all of the character IDs
 - [x] Remove duplication in successive requests
 - [x] Cache the IDs
+- [x] Do chunking properly
