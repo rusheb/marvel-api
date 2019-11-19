@@ -1,16 +1,18 @@
 NOW
-- [x] Add character endpoint
-- [x] Remove duplication between get_character and get_characters
-- [x] Filter the raw character in a nice way
+- [x] Implement translations
+- [ ] Error when language code is wrong
 
 TODO
+- [ ] Create swagger spec
+- [ ] Change port to 8080
+- [ ] Cache the ids _before_ the first request
+- [ ] Do auth the Client-side way
+- [ ] Integration test
+- [ ] Nicer errors if environment variables aren't set
 - [ ] Set cache expiry date
+- [ ] Fix mypy handling of read_characters
 - [ ] Remove hardcoding of 100 increment
 - [ ] Do logging properly
-- [ ] Change port to 8080
-- [ ] Integration test
-- [ ] User BaseModel
-- [ ] Fix mypy handlign of read_characters
 
 DONE
 - [x] Make a request to the Marvel API
@@ -20,3 +22,6 @@ DONE
 - [x] Cache the IDs
 - [x] Do chunking properly
 - [x] Set up API with characters endpoint
+- [x] Add character endpoint
+- [x] Remove duplication between get_character and get_characters
+- [x] Filter the raw character in a nice way

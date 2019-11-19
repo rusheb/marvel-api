@@ -2,6 +2,7 @@ from typing import Dict
 
 import requests_cache
 from fastapi import FastAPI
+from translate import Translator
 
 import marvel
 
@@ -22,5 +23,11 @@ def read_characters() -> Dict:
 
 
 @app.get("/characters/{character_id}")
-def read_character(character_id: int) -> Dict:
-    return marvel.get_character(character_id)
+def read_character(character_id: int, language: str = None) -> Dict:
+    character = marvel.get_character(character_id)
+
+    if language:
+        translator = Translator(to_lang=language)
+        character["description"] = translator.translate(character["description"])
+
+    return character

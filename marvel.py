@@ -6,6 +6,7 @@ from pprint import pprint
 from typing import Dict, Generator
 
 import requests
+from translate import Translator
 
 BASE_URL = "http://gateway.marvel.com/v1/public/"
 PUBLIC_KEY = environ["MARVEL_PUBLIC_KEY"]
@@ -54,3 +55,9 @@ def get_character(character_id: int) -> Dict:
         key: raw_character[key] for key in ["id", "name", "description", "thumbnail"]
     }
     return filtered_character
+
+
+if __name__ == "__main__":
+    translator = Translator(to_lang="de")
+    desc = get_character(1009718)["description"]
+    print(translator.translate(desc))
