@@ -1,0 +1,3 @@
+- [ ] Setup basic API
+- [x] Make a request to the Marvel API
+- [ ] get the first 100 character IDs
