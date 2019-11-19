@@ -3,7 +3,7 @@ from typing import Dict
 import requests_cache
 from fastapi import FastAPI
 
-from marvel import get_all_characters
+import marvel
 
 app = FastAPI()
 requests_cache.install_cache("marvel_cache", ignored_parameters=["hash", "ts"])
@@ -16,4 +16,11 @@ def read_root() -> Dict:
 
 @app.get("/characters")
 def read_characters() -> Dict:
-    return [character["id"] for character in get_all_characters()]  # type: ignore
+    return [  # type: ignore
+        character["id"] for character in marvel.get_all_characters()
+    ]
+
+
+@app.get("/characters/{character_id}")
+def read_character(character_id: int) -> Dict:
+    return marvel.get_character(character_id)
