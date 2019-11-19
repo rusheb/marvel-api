@@ -1,10 +1,7 @@
 NOW
-- [x] Implement translations
-- [x] Error when language code is wrong
+- [x] Change port to 8080
 
 TODO
-- [ ] Create swagger spec
-- [ ] Change port to 8080
 - [ ] Cache the ids _before_ the first request
 - [ ] Do auth the Client-side way
 - [ ] Documentation
@@ -26,3 +23,5 @@ DONE
 - [x] Add character endpoint
 - [x] Remove duplication between get_character and get_characters
 - [x] Filter the raw character in a nice way
+- [x] Implement translations
+- [x] Error when language code is wrong
