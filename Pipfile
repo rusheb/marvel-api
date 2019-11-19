@@ -9,6 +9,7 @@ verify_ssl = true
 fastapi = "*"
 uvicorn = "*"
 requests = "*"
+requests-cache = "*"
 
 [requires]
 python_version = "3.8"
