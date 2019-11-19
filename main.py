@@ -4,47 +4,47 @@ from hashlib import md5
 from os import environ
 
 import requests
+import requests_cache
 
+URL = "http://gateway.marvel.com/v1/public/characters"
 PUBLIC_KEY = environ["MARVEL_PUBLIC_KEY"]
 PRIVATE_KEY = environ["MARVEL_PRIVATE_KEY"]
 
-url = "http://gateway.marvel.com/v1/public/characters"
-now = datetime.now().strftime("%b %d %Y %H:%M:%S")
-string_to_hash = now + PRIVATE_KEY + PUBLIC_KEY
-key_hash = md5(string_to_hash.encode("utf-8")).hexdigest()
-# offset = 0
-offset = 1200
 
-params = {
-    "apikey": PUBLIC_KEY,
-    "ts": now,
-    "hash": key_hash,
-    "limit": "100",
-    "offset": str(offset),
-}
-response_string = requests.get(url, params=params)
-response_dict = json.loads(response_string.content.decode("utf-8"))
-results = response_dict["data"]["results"]
-ids = [result["id"] for result in results]
-
-while results != []:
+def get_characters(offset: int):
     print(f"Getting characters {offset} to {offset + 100}")
-    offset += 100
+
     now = datetime.now().strftime("%b %d %Y %H:%M:%S")
     string_to_hash = now + PRIVATE_KEY + PUBLIC_KEY
-    key_hash = md5(string_to_hash.encode("utf-8")).hexdigest()
+    request_hash = md5(string_to_hash.encode("utf-8")).hexdigest()
+
     params = {
         "apikey": PUBLIC_KEY,
         "ts": now,
-        "hash": key_hash,
+        "hash": request_hash,
         "limit": "100",
         "offset": str(offset),
     }
-    response_string = requests.get(url, params=params)
+    response_string = requests.get(URL, params=params)
     response_dict = json.loads(response_string.content.decode("utf-8"))
-    results = response_dict["data"]["results"]
-    ids += [result["id"] for result in results]
+    try:
+        return response_dict["data"]["results"]
+    except Exception:
+        print(response_dict)
+        return
 
 
-print(f"Found {len(ids)} ids")
-print(ids)
+if __name__ == "__main__":
+    requests_cache.install_cache("marvel_cache", ignored_parameters=["hash", "ts"])
+
+    offset = 1300
+    characters = get_characters(offset)
+    ids = [character["id"] for character in characters]
+
+    while characters != []:
+        offset += 100
+        characters = get_characters(offset)
+        ids += [character["id"] for character in characters]
+
+    print(f"Found {len(ids)} ids")
+    print(ids)
