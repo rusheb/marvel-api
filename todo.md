@@ -1,12 +1,13 @@
 NOW
 - [x] Implement translations
-- [ ] Error when language code is wrong
+- [x] Error when language code is wrong
 
 TODO
 - [ ] Create swagger spec
 - [ ] Change port to 8080
 - [ ] Cache the ids _before_ the first request
 - [ ] Do auth the Client-side way
+- [ ] Documentation
 - [ ] Integration test
 - [ ] Nicer errors if environment variables aren't set
 - [ ] Set cache expiry date
