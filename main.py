@@ -2,7 +2,6 @@ import json
 from datetime import datetime
 from hashlib import md5
 from os import environ
-from pprint import pprint
 
 import requests
 
@@ -14,8 +13,10 @@ now = datetime.now().strftime("%b %d %Y %H:%M:%S")
 string_to_hash = now + private_key + public_key
 key_hash = md5(string_to_hash.encode("utf-8")).hexdigest()
 
-params = {"apikey": public_key, "ts": now, "hash": key_hash}
-response = requests.get(url, params=params)
-result = json.loads(response.content.decode("utf-8"))
+params = {"apikey": public_key, "ts": now, "hash": key_hash, "limit": "100"}
+response_string = requests.get(url, params=params)
+response_dict = json.loads(response_string.content.decode("utf-8"))
+ids = [result["id"] for result in response_dict["data"]["results"]]
 
-pprint(result)
+print(f"Found {len(ids)} ids")
+print(ids)
