@@ -2,7 +2,6 @@ import json
 from datetime import datetime
 from hashlib import md5
 from os import environ
-from pprint import pprint
 from typing import Dict, Generator
 
 import requests

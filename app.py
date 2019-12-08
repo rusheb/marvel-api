@@ -19,6 +19,7 @@ def read_root() -> Dict:
 
 @app.get("/characters")
 def read_characters() -> Dict:
+    """Return a list of character IDs"""
     return [  # type: ignore
         character["id"] for character in marvel.get_all_characters()
     ]
@@ -26,6 +27,10 @@ def read_characters() -> Dict:
 
 @app.get("/characters/{character_id}")
 def read_character(response: Response, character_id: int, language: str = None) -> Dict:
+    """
+    Returns a character with the id, name and description fields.
+    Set the `language` param to translate the description.
+    """
     character = marvel.get_character(character_id)
 
     if language:
